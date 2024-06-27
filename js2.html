@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sort String Alphabetically</title>
+<script>
+  function sortStringAlphabetically(inputString) {
+    // Convert the string to an array of characters, sort them, and join back into a string
+    return inputString.split('').sort().join('');
+  }
+
+  function sortAndDisplay() {
+    // Get user input from the input field
+    let inputString = document.getElementById("inputString").value;
+
+    // Sort the string alphabetically
+    let sortedString = sortStringAlphabetically(inputString);
+    
+    // Display the sorted string
+    document.getElementById("result").textContent = `Sorted string: ${sortedString}`;
+  }
+</script>
+</head>
+<body>
+  <h2>Sort String Alphabetically</h2>
+  <p>Enter a string to sort alphabetically:</p>
+  <input type="text" id="inputString">
+  <button onclick="sortAndDisplay()">Sort</button>
+  <p id="result"></p>
+</body>
+</html>

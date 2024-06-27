@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Login</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+  }
+  .container {
+    max-width: 350px;
+    margin: 80px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+    color: #3897f0;
+    margin-bottom: 20px;
+  }
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type="submit"] {
+    background-color: #3897f0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  input[type="submit"]:hover {
+    background-color: #3578e5;
+  }
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  .forgot-password {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .signup-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+</style>
+<script>
+  function validateForm() {
+    var username = document.getElementById("username").value.trim();
+    var password = document.getElementById("password").value.trim();
+    var error = false;
+
+    // Reset previous error messages
+    document.getElementById("errorUsername").textContent = "";
+    document.getElementById("errorPassword").textContent = "";
+
+    // Validate username
+    if (username === "") {
+      document.getElementById("errorUsername").textContent = "Username is required";
+      error = true;
+    }
+
+    // Validate password
+    if (password === "") {
+      document.getElementById("errorPassword").textContent = "Password is required";
+      error = true;
+    }
+
+    // If no errors, submit the form (in this example, just alert success)
+    if (!error) {
+      alert("Login successful!");
+      // Here you would typically submit the form to a server-side script for further processing
+    }
+  }
+</script>
+</head>
+<body>
+  <div class="container">
+    <h2>Instagram</h2>
+    <form onsubmit="event.preventDefault(); validateForm();">
+      <input type="text" id="username" name="username" placeholder="Username">
+      <span id="errorUsername" class="error-message"></span><br>
+      
+      <input type="password" id="password" name="password" placeholder="Password">
+      <span id="errorPassword" class="error-message"></span><br>
+      
+      <label><input type="checkbox"> Remember Me</label><br>
+      
+      <input type="submit" value="Log In">
+      
+      <div class="forgot-password">
+        <a href="#">Forgot Password?</a>
+      </div>
+      
+      <div class="signup-link">
+        <span>Don't have an account? </span><a href="#">Sign up</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

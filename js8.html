@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  input, select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  input[type="radio"], input[type="checkbox"] {
+    width: auto;
+    margin-bottom: 0;
+  }
+  .button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .button.poor {
+    background-color: #FF6347; /* Red color for poor state */
+  }
+  .button:hover {
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<form id="registrationForm">
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" name="firstName" required>
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" name="lastName" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+
+  <label for="rePassword">Re-enter Password:</label>
+  <input type="password" id="rePassword" name="rePassword" required>
+
+  <label for="gender">Gender:</label>
+  <select id="gender" name="gender" required>
+    <option value="">Select Gender</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+  </select>
+
+  <label for="age">Age:</label>
+  <input type="number" id="age" name="age" required>
+
+  <label for="phone">Phone Number:</label>
+  <input type="tel" id="phone" name="phone" required>
+
+  <label for="address">Address:</label>
+  <textarea id="address" name="address" rows="4" required></textarea>
+
+  <label for="state">State:</label>
+  <input type="text" id="state" name="state" required>
+
+  <label for="country">Country:</label>
+  <input type="text" id="country" name="country" required>
+
+  <label>Languages Known:</label>
+  <div>
+    <label><input type="radio" name="languages" value="english"> English</label>
+    <label><input type="radio" name="languages" value="kannada"> Kannada</label>
+    <label><input type="radio" name="languages" value="hindi"> Hindi</label>
+    <label><input type="radio" name="languages" value="telugu"> Telugu</label>
+  </div>
+
+  <label>
+    <input type="checkbox" id="terms" name="terms" required>
+    Hereby I deserve all the given details are true
+  </label>
+
+  <input type="submit" value="Register" class="button" id="registerButton">
+</form>
+
+<p><a href="#" id="loginLink">Login to ethnus</a></p>
+
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  // Perform validation
+  var firstName = document.getElementById("firstName").value.trim();
+  var lastName = document.getElementById("lastName").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var password = document.getElementById("password").value;
+  var rePassword = document.getElementById("rePassword").value;
+  var gender = document.getElementById("gender").value;
+  var age = document.getElementById("age").value;
+  var phone = document.getElementById("phone").value.trim();
+  var address = document.getElementById("address").value.trim();
+  var state = document.getElementById("state").value.trim();
+  var country = document.getElementById("country").value.trim();
+  var languages = document.querySelector('input[name="languages"]:checked');
+  var terms = document.getElementById("terms").checked;
+
+  // Validate password strength
+  var passwordStrength = checkPasswordStrength(password);
+
+  if (password !== rePassword) {
+    alert("Passwords do not match.");
+    return;
+  }
+
+  if (!terms) {
+    alert("Please agree to the terms.");
+    return;
+  }
+
+  if (!languages) {
+    alert("Please select a language.");
+    return;
+  }
+
+  // Optionally, additional validation can be added for other fields
+
+  // If password is weak, add 'poor' class to register button
+  var registerButton = document.getElementById("registerButton");
+  if (passwordStrength === "poor") {
+    registerButton.classList.add("poor");
+  } else {
+    registerButton.classList.remove("poor");
+  }
+
+  // Here you can submit the form or perform further actions
+  // For now, let's just log the form data
+  console.log({
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password,
+    gender: gender,
+    age: age,
+    phone: phone,
+    address: address,
+    state: state,
+    country: country,
+    language: languages.value
+  });
+});
+
+function checkPasswordStrength(password) {
+  // For simplicity, check length only
+  if (password.length < 8) {
+    return "poor";
+  }
+  return "good";
+}
+
+// Example of how you might handle the login link
+document.getElementById("loginLink").addEventListener("click", function(event) {
+  event.preventDefault();
+  alert("Redirecting to login page...");
+  // Replace '#' with your actual login page URL
+  window.location.href = "#";
+});
+</script>
+
+</body>
+</html>

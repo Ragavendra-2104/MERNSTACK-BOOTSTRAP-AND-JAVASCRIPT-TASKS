@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form with Validation</title>
+<style>
+  .error {
+    color: red;
+  }
+</style>
+<script>
+  function validateForm() {
+    // Reset any previous error messages
+    document.getElementById("errorName").textContent = "";
+    document.getElementById("errorEmail").textContent = "";
+    document.getElementById("errorWebsite").textContent = "";
+    document.getElementById("errorMessage").textContent = "";
+
+    // Fetch form values
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let website = document.getElementById("website").value.trim();
+    let message = document.getElementById("message").value.trim();
+
+    let valid = true;
+
+    // Validate Name
+    if (name === "") {
+      document.getElementById("errorName").textContent = "Name is required";
+      valid = false;
+    }
+
+    // Validate Email
+    if (!isValidEmail(email)) {
+      document.getElementById("errorEmail").textContent = "Valid email is required";
+      valid = false;
+    }
+
+    // Validate Website
+    if (website !== "" && !isValidURL(website)) {
+      document.getElementById("errorWebsite").textContent = "Valid website URL is required";
+      valid = false;
+    }
+
+    // Validate Message
+    if (message === "") {
+      document.getElementById("errorMessage").textContent = "Message is required";
+      valid = false;
+    }
+
+    // If all fields are valid, submit the form (or perform action)
+    if (valid) {
+      // Here, you could submit the form, process the data, etc.
+      alert("Form submitted successfully!");
+    }
+  }
+
+  function isValidEmail(email) {
+    // Simple email validation using regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function isValidURL(url) {
+    // Simple URL validation using regex (for http/https)
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(url);
+  }
+</script>
+</head>
+<body>
+  <h2>Contact Form</h2>
+  
+  <form id="contactForm" onsubmit="event.preventDefault(); validateForm();">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <span id="errorName" class="error"></span><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br>
+    <span id="errorEmail" class="error"></span><br><br>
+
+    <label for="website">Website:</label><br>
+    <input type="text" id="website" name="website"><br>
+    <span id="errorWebsite" class="error"></span><br><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="30"></textarea><br>
+    <span id="errorMessage" class="error"></span><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date and Time Display</title>
+<script>
+  function showDate() {
+    // Get the current date
+    let currentDate = new Date().toLocaleDateString();
+    
+    // Display the current date
+    document.getElementById("dateDisplay").textContent = `Current Date: ${currentDate}`;
+  }
+
+  function showTimeIST() {
+    // Get the current time in IST (Indian Standard Time)
+    let ISTOffset = 5.5 * 60 * 60 * 1000; // IST offset from UTC in milliseconds (5 hours 30 minutes)
+    let nowIST = new Date(Date.now() + ISTOffset).toLocaleTimeString('en-IN', {timeZone: 'Asia/Kolkata'});
+    
+    // Display the current time in IST
+    document.getElementById("timeDisplay").textContent = `Current Time (IST): ${nowIST}`;
+  }
+</script>
+</head>
+<body>
+  <h2>Date and Time Display</h2>
+  
+  <button onclick="showDate()">Show Date</button>
+  <button onclick="showTimeIST()">Show Time (IST)</button><br><br>
+
+  <p id="dateDisplay"></p>
+  <p id="timeDisplay"></p>
+</body>
+</html>
